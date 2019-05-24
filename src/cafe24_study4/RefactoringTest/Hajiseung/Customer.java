@@ -20,6 +20,7 @@ public class Customer {
 	}
 
 	public String statement() {
+		long preTime = System.nanoTime();
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Enumeration rentals = _rentals.elements();
@@ -63,6 +64,8 @@ public class Customer {
 		}
 		result += "누적 대여료 :" + String.valueOf(totalAmount) + "\n";
 		result += "적립 포인트 :" + String.valueOf(frequentRenterPoints) + "\n";
+		long postTime = System.nanoTime();
+		System.out.println(postTime-preTime);
 		return result;
 	}
 
