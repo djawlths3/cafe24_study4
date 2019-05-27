@@ -271,7 +271,7 @@ class Gamma{
 ```
 - 원본 메서드의 매개변들을 생성자 메서드를 추가한다.
 ```java
-Gamma(Account source, int inputVal, int quantity, int yearToDate){
+public Gamma(Account source, int inputVal, int quantity, int yearToDate){
 	this._account = source;
 	this.inputVal = inputVal;
 	this.quantity = quantity;
@@ -281,11 +281,11 @@ Gamma(Account source, int inputVal, int quantity, int yearToDate){
 - compute 메서드를 만들고 여기에 원본 메서드를 옮긴다.
 ```java
 int compute(){
-	int importantValue1 = (inputVal * quantity) + _account.delta();
-	int importantValue2 = (inputVal * yearToDate) + 100;
+	importantValue1 = (inputVal * quantity) + _account.delta();
+	importantValue2 = (inputVal * yearToDate) + 100;
 	if((yearToDate - importantValue1) > 100)
 		importantValue2 -= 20;
-	int importantValue3 = importantValue2 * 7;
+	importantValue3 = importantValue2 * 7;
 	return importantValue3 - 2*importantValue1;
 }
 
@@ -300,12 +300,12 @@ int compute(){
   - 기존의 compute 메서드에서 if 절에 대해 메서드 추출을 실시
 ```java
 int compute(){
-	int importantValue1 = (inputVal * quantity) + _account.delta();
-	int importantValue2 = (inputVal * yearToDate) + 100;
+	importantValue1 = (inputVal * quantity) + _account.delta();
+	importantValue2 = (inputVal * yearToDate) + 100;
 
 	importantThing(); // 메서드 추출 실시
 
-	int importantValue3 = importantValue2 * 7;
+	importantValue3 = importantValue2 * 7;
 	return importantValue3 - 2*importantValue1;
 }
 
