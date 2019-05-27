@@ -190,6 +190,33 @@ Method가 3개 이상일 때 사용
 9. 원본 메서드를 삭제하던지, 아니면 위임 메서드로 사용하게 내버려 두자.
 10. 원본 메서드를 삭제할 때는 기존의 참조를 전부 대상 메서드 참조로 수정하자.
 11. 컴파일과 테스트를 실시하자.
+```java
+class Account{
+  private AccountType accountType;
+  private int daysOverdrawn;
+  double overdraftCharge(){
+    if(accountType.isPremuim()){
+      if(daysOverdrawn>7){}
+    }
+  }
+}
+위 처럼 되어 있으면
+class Account{
+  private AccountType accountType;
+  double overdrfatCharge(){
+    return accountType.overdraftCharge();
+  };
+}
+
+class AccountType{
+    double overdraftCharge(int daysOverdrawn){
+      if(~){
+       if(~){}
+      }
+    }
+}
+이처럼 바꿔준다.
+```
 - - -
 **필드 이동**
 1. 필드가 public이면 필드 캡슐화 기법(getter/setter)을 실시
@@ -200,6 +227,43 @@ Method가 3개 이상일 때 사용
 6. 원본 클래스에서 필드를 삭제하자.
 7. 원본 필드를 참조하는 모든 부분을 대상 클래스에 있는 적절한 메서드를 참조하게 수정하자.
 8. 컴파일과 테스트를 실시하자.
+```java
+class Person{
+    private Bee bee;
+    private int fly;
+    int fly_ant(){
+      return fly*30;
+    }
+}
+위의 코드를
+class Person{
+  private Bee bee;
+  int getFlyTime(){
+    bee.getFly()*30;
+  }
+}
+이처럼 혹은
+class Person{
+  private Bee bee;
+  int getFlyTime(){
+    getBeeFlyTime();
+  }
+  private int getBeeFlyTime(){
+    return bee.getFly*30;
+  }
+}
+
+class Bee{
+  private int fly;
+
+  public void setFly(int data){
+    this.fly=data;
+  }
+  public int getFly(){
+    return fly;
+  }
+}
+```
 - - -
 **클래스 추출**
 + 클래스의 어느 부분을 분리할지 궁리
@@ -214,6 +278,26 @@ Method가 3개 이상일 때 사용
 7. 메서드 이동을 실시할 때마다 테스트를 실시하자.
 8. 각 클래스를 다시 검사해서 인터페이스를 줄이자.
 9. 여러 곳에서 클래스에 접근할 수 있게 할지 결정하자. 여러 곳에서 접근할 수 있게 할 경우, 새 클래스를 참조 객체나 변경불가 값 객체로서 공개할지 여부를 결정하자.*(접근제어자)*
+```java
+class Person{
+  private String lastname;
+  private String firstname;
+  private int phoneNumber;
+
+  getter/setter 구성되어있다.
+}
+
+class Person{
+  private String lastname;
+  private String firstname;
+  TelephoneNumber을 호출
+}
+
+class TelephoneNumber{
+  private int phoneNumber;
+  getter/setter 작성
+}
+```
 
 ````
 접근제어자의 정도를 정하는 법
@@ -237,6 +321,28 @@ Method가 3개 이상일 때 사용
 3. 각 메서드를 수정할 때마다 컴파일과 테스트를 실시하자.
 4. 대리 객체를 읽고 써야 할 클라이언트가 하나도 남지 않게 되면, 서버에서 대리 객체가 사용하는 읽기/쓰기 메서드를 삭제하자.
 5. 컴파일과 테스트를 실시하자.
+```java
+class Person{
+  private Department department;
+  public Department getDepartment(){
+    return department;
+  }
+  public void setDepartment(Department arg){
+    department=arg;
+  }
+}
+class Department{
+  private String chargeCode;
+  private Person manager;
+
+  public Department(Person manager){
+    this.manager=manager;
+  }
+  public Person getManger(){
+    return manager;
+  }
+}
+```
 - - -
 **과잉 중개 메서드 제거**
 대리객체은폐의 반대이다
