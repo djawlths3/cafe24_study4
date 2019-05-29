@@ -17,14 +17,20 @@
  
 결합도와 응집도~  
 
-if(endIndex != -1) {
-			String id = request.getRequestURL().substring(firstIndex, endIndex);
+int firstIndex = request.getRequestURL().indexOf("/jblog")+7 ; 
+		int endIndex = request.getRequestURL().indexOf("/",firstIndex);		
+		String id;
+		
+		if(endIndex != -1) {
+			id = request.getRequestURL().substring(firstIndex, endIndex);
 			if(id.equals(authUser.getId())) {
 				authUser.setHostCheck(id);				
 			}
 			session.setAttribute("authUser", authUser);
 		} else {
-			String id = request.getRequestURL().substring(firstIndex, request.getRequestURL().length());
-			
+			id = request.getRequestURL().substring(firstIndex, request.getRequestURL().length());
+			if(id.equals(authUser.getId())) {
+				authUser.setHostCheck(id);				
+			}
+			session.setAttribute("authUser", authUser);
 		}
- 
