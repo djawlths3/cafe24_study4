@@ -16,4 +16,15 @@
  
  
 결합도와 응집도~  
+
+if(endIndex != -1) {
+			String id = request.getRequestURL().substring(firstIndex, endIndex);
+			if(id.equals(authUser.getId())) {
+				authUser.setHostCheck(id);				
+			}
+			session.setAttribute("authUser", authUser);
+		} else {
+			String id = request.getRequestURL().substring(firstIndex, request.getRequestURL().length());
+			
+		}
  
