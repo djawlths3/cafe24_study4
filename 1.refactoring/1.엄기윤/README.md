@@ -34,3 +34,5 @@ int firstIndex = request.getRequestURL().indexOf("/jblog")+7 ;
 			}
 			session.setAttribute("authUser", authUser);
 		}
+		
+강의자료: https://drive.google.com/drive/folders/1bePDWpXMzb1OND4aqYzp2jo9iz3N3f89
